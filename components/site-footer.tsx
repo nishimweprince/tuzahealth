@@ -1,3 +1,4 @@
+import { FooterLegalLinks } from "@/components/footer-legal-links";
 import { COMPANY, COPY, SERVICES } from "@/lib/site-data";
 
 export function SiteFooter() {
@@ -67,11 +68,7 @@ export function SiteFooter() {
 
         <div className="border-t border-[#1c3a4f] pt-[22px] flex flex-col gap-3 text-xs text-footer-muted md:flex-row md:items-center md:justify-between">
           <div>© 2026 {COMPANY.legalName}. All rights reserved.</div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1">
-            <span>Notice of Privacy Practices</span>
-            <span aria-hidden>·</span>
-            <span>Accessibility Statement</span>
-          </div>
+          <FooterLegalLinks />
         </div>
       </div>
     </footer>

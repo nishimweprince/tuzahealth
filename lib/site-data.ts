@@ -181,3 +181,110 @@ export const FAQS = [
 ] as const;
 
 export type FAQ = (typeof FAQS)[number];
+
+export type LegalDocumentSection = {
+  heading?: string;
+  paragraphs: readonly string[];
+};
+
+export type LegalDocument = {
+  title: string;
+  lastReviewed: string;
+  callout?: string;
+  sections: readonly LegalDocumentSection[];
+};
+
+export const NOTICE_OF_PRIVACY_PRACTICES: LegalDocument = {
+  title: "Notice of Privacy Practices",
+  lastReviewed: COMPANY.lastReviewed,
+  callout: `A complete Notice of Privacy Practices is available on request. Call our office at ${COMPANY.phone} to receive a copy or to discuss how we protect your information.`,
+  sections: [
+    {
+      paragraphs: [
+        `This notice describes how medical information about you may be used and disclosed by ${COMPANY.legalName} and how you can get access to this information. We are required by law to maintain the privacy of protected health information (PHI) and to provide you with this notice of our legal duties and privacy practices.`,
+        "This is a summary notice for our website. It is not a substitute for the full Notice of Privacy Practices that we provide to clients and families.",
+      ],
+    },
+    {
+      heading: "Who this notice applies to",
+      paragraphs: [
+        `${COMPANY.legalName} provides home-based supportive, enhanced and specialised medical care in ${COMPANY.serviceArea}. This notice applies to PHI we create or receive in connection with those services.`,
+      ],
+    },
+    {
+      heading: "How we may use and disclose your information",
+      paragraphs: [
+        "We may use and disclose PHI for treatment, payment and health care operations, such as coordinating care, managing schedules, quality review and required reporting.",
+        "We may also use or disclose PHI when required by law, for public health activities, to prevent serious threats to health or safety, or when otherwise permitted or required under applicable privacy rules.",
+        "We will not use or sell your information for unrelated marketing without your authorisation.",
+      ],
+    },
+    {
+      heading: "Your rights",
+      paragraphs: [
+        "You have the right to request restrictions on certain uses and disclosures, although we are not always required to agree to a requested restriction.",
+        "You have the right to request confidential communications by alternative means or at alternative locations.",
+        "You have the right to inspect and obtain a copy of PHI that we maintain about you, subject to limited exceptions.",
+        "You have the right to request an amendment to PHI we maintain, and to receive an accounting of certain disclosures.",
+        "You have the right to receive a paper copy of our full Notice of Privacy Practices upon request.",
+      ],
+    },
+    {
+      heading: "Our responsibilities",
+      paragraphs: [
+        "We are required by law to maintain the privacy of PHI, provide you with this notice, and follow the terms of the notice currently in effect.",
+        "We reserve the right to change our privacy practices and to make the new terms effective for all PHI we maintain. Updated notices will be available on request and, where required, posted in our office.",
+      ],
+    },
+    {
+      heading: "Questions, complaints and contact",
+      paragraphs: [
+        `If you have questions about this notice or our privacy practices, contact ${COMPANY.legalName} at ${COMPANY.phone} or ${COMPANY.address}, ${COMPANY.addressCity}.`,
+        "If you believe your privacy rights have been violated, you may file a complaint with us or with the U.S. Department of Health and Human Services, Office for Civil Rights. We will not retaliate against you for filing a complaint.",
+      ],
+    },
+    {
+      heading: "Using this website",
+      paragraphs: [
+        "Our general website contact form is not designed for submitting detailed medical or insurance information. Please do not include protected health information in web enquiries. Call us if you need to discuss private health details.",
+      ],
+    },
+  ],
+};
+
+export const ACCESSIBILITY_STATEMENT: LegalDocument = {
+  title: "Accessibility Statement",
+  lastReviewed: COMPANY.lastReviewed,
+  sections: [
+    {
+      paragraphs: [
+        `${COMPANY.legalName} is committed to making our website reasonably accessible to people with disabilities. We aim to conform, where practicable, to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA.`,
+        "Accessibility is an ongoing effort. We review this site periodically and improve pages, components and content based on feedback and recognised best practices.",
+      ],
+    },
+    {
+      heading: "Measures we take",
+      paragraphs: [
+        "We use semantic HTML structure, descriptive headings and labels, and visible keyboard focus styles across interactive elements.",
+        "We design for readable contrast, scalable text and layouts that adapt to different screen sizes.",
+        "Where animations or motion are used, we respect the prefers-reduced-motion setting in supporting browsers.",
+        "We aim to ensure forms, navigation and disclosure patterns such as accordions and dialogs can be operated with a keyboard.",
+      ],
+    },
+    {
+      heading: "Known limitations",
+      paragraphs: [
+        "Some third-party content, older documents or downloadable resources may not yet meet every accessibility requirement.",
+        "We are working to improve alternative text, document accessibility and consistency across all pages as the site evolves.",
+      ],
+    },
+    {
+      heading: "Feedback and assistance",
+      paragraphs: [
+        `If you have difficulty accessing any part of this website, or if you need information in an alternative format, please contact us at ${COMPANY.phone} or through our contact page.`,
+        `Postal address: ${COMPANY.address}, ${COMPANY.addressCity}.`,
+        "When you contact us, please describe the page or feature you tried to use and the difficulty you experienced so we can assist you and improve the site.",
+      ],
+    },
+  ],
+};
