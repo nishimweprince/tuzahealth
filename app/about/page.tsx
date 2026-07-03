@@ -1,6 +1,8 @@
+import Image from "next/image";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PhotoPlaceholder } from "@/components/sections/photo-placeholder";
 import { SectionHeader } from "@/components/sections/section-header";
+import { cldBlur, cldWarm, IMAGES } from "@/lib/cloudinary";
 import { COPY, COMPANY } from "@/lib/site-data";
 
 export default function AboutPage() {
@@ -14,10 +16,17 @@ export default function AboutPage() {
       />
 
       <div className="grid items-start gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
-        <PhotoPlaceholder
-          label={"PHOTO PLACEHOLDER\noffice exterior, Overland Park"}
-          className="min-h-[220px] md:min-h-[300px]"
-        />
+        <div className="relative min-h-[220px] overflow-hidden rounded-lg md:min-h-[300px]">
+          <Image
+            src={cldWarm(IMAGES.hero)}
+            alt="A Tuza Health caregiver supporting an older adult at home"
+            fill
+            sizes="(min-width: 768px) 40vw, 100vw"
+            placeholder="blur"
+            blurDataURL={cldBlur(IMAGES.hero)}
+            className="object-cover"
+          />
+        </div>
 
         <div className="flex flex-col gap-6">
           <p className="type-body">{COPY.aboutApproach}</p>

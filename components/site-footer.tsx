@@ -1,6 +1,9 @@
 import { FooterLegalLinks } from "@/components/footer-legal-links";
 import { COMPANY, COPY, SERVICES } from "@/lib/site-data";
 
+const MAP_QUERY = encodeURIComponent(`${COMPANY.address}, ${COMPANY.addressCity}`);
+const MAP_SRC = `https://maps.google.com/maps?q=${MAP_QUERY}&z=14&output=embed`;
+
 export function SiteFooter() {
   return (
     <footer className="bg-navy pt-14 pb-8">
@@ -62,6 +65,16 @@ export function SiteFooter() {
                 <br />
                 {COMPANY.addressCity}
               </span>
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-md border border-[#1c3a4f]">
+              <iframe
+                title={`Map to the ${COMPANY.officeLabel}`}
+                src={MAP_SRC}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-[150px] w-full border-0 grayscale-[0.2]"
+              />
             </div>
           </div>
         </div>

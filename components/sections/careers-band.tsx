@@ -1,9 +1,7 @@
 import Image from "next/image";
 
+import { cldBlur, cldWarm, IMAGES } from "@/lib/cloudinary";
 import { CTA, COPY } from "@/lib/site-data";
-
-const CAREERS_IMAGE_SRC =
-  "https://res.cloudinary.com/nishimweprince/image/upload/v1782865521/timesheets/website/nursing-careers_hurq18.jpg";
 
 export function CareersBand() {
   return (
@@ -26,11 +24,13 @@ export function CareersBand() {
         </div>
         <div className="relative min-h-[220px] overflow-hidden rounded md:min-h-full">
           <Image
-            src={CAREERS_IMAGE_SRC}
+            src={cldWarm(IMAGES.nursingCareers)}
             alt="Nurse caring for a patient"
             fill
             className="object-cover"
             sizes="(min-width: 768px) 33vw, 100vw"
+            placeholder="blur"
+            blurDataURL={cldBlur(IMAGES.nursingCareers)}
           />
         </div>
       </div>

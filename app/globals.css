@@ -27,7 +27,7 @@
   --color-secondary-foreground: #0e2a3d;
   --color-muted: #e5e9ec;
   --color-muted-foreground: #5b6670;
-  --color-body-muted: #45525c;
+  --color-body-muted: #3c4a54;
   --color-label-muted: #5b6670;
   --color-sky-muted: #6eb8db;
   --color-trust-text: #cbd8e1;
@@ -123,31 +123,6 @@
   padding-inline: 1.75rem;
 }
 
-@utility photo-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
-  border: 1px solid #c2d0da;
-  background: repeating-linear-gradient(
-    135deg,
-    #d6eaf3,
-    #d6eaf3 14px,
-    #c5dde9 14px,
-    #c5dde9 28px
-  );
-}
-
-@utility photo-placeholder-label {
-  font-family: ui-monospace, monospace;
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
-  color: #2f4654;
-  background: rgba(244, 246, 248, 0.85);
-  padding: 0.625rem 0.875rem;
-}
-
 @utility hero-viewport {
   display: grid;
   grid-template: 1fr / 1fr;
@@ -180,11 +155,13 @@
 @utility hero-overlay {
   z-index: 1;
   pointer-events: none;
+  /* Lighter, warmer wash: the left column stays dark enough for legible white
+     text, but the photograph reads through crisp rather than as a navy fog. */
   background: linear-gradient(
     to right,
-    color-mix(in srgb, var(--color-navy) 82%, transparent),
-    color-mix(in srgb, var(--color-navy) 50%, transparent) 55%,
-    color-mix(in srgb, var(--color-navy) 20%, transparent)
+    color-mix(in srgb, var(--color-navy) 66%, transparent),
+    color-mix(in srgb, var(--color-navy) 32%, transparent) 55%,
+    color-mix(in srgb, var(--color-navy) 8%, transparent)
   );
 }
 
@@ -197,11 +174,21 @@
 
 @utility section-eyebrow {
   margin-bottom: 0.625rem;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--color-primary);
+}
+
+/* Single oversized editorial statement — the page's one focal type moment. */
+@utility type-display {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  color: var(--color-foreground);
 }
 
 @utility type-hero {
@@ -225,6 +212,25 @@
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-body-muted);
+}
+
+/* Scroll reveal — the <Reveal> component flips data-revealed when in view.
+   Guarded by the motion query so reduced-motion users get static content. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal[data-revealed="true"] {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @layer base {

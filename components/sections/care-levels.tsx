@@ -39,7 +39,10 @@ export function CareLevels() {
         {SERVICES.map((service, index) => {
           const level = index + 1;
           return (
-            <li key={service.slug} className="flex flex-col bg-card px-7 py-8">
+            <li
+              key={service.slug}
+              className="flex flex-col bg-card px-7 py-8 transition-shadow duration-200 hover:shadow-[inset_0_3px_0_0_var(--color-primary)]"
+            >
               <div className="mb-5 flex items-center justify-between">
                 <span className="font-serif text-[15px] font-semibold tabular-nums text-primary">
                   {String(level).padStart(2, "0")}

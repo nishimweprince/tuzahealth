@@ -11,6 +11,9 @@ import { SectionHeader } from '@/components/sections/section-header';
 import { SectionShell } from '@/components/sections/section-shell';
 import { CareLevels } from '@/components/sections/care-levels';
 import { TrustStrip } from '@/components/sections/trust-strip';
+import { TrustStatement } from '@/components/sections/trust-statement';
+import { Reveal } from '@/components/reveal';
+import { cldBlur, cldWarm, IMAGES } from '@/lib/cloudinary';
 import { COPY, CTA, COMPANY, FAQS } from '@/lib/site-data';
 import Image from 'next/image';
 
@@ -20,14 +23,7 @@ const HERO_CREDENTIALS = [
   { label: 'Service area', value: COMPANY.serviceAreaShort },
 ] as const;
 
-/** Swap for production hero: place image at `public/hero.jpg` and use next/image in the background layer below. */
-const HERO_IMAGE_SRC =
-  'https://res.cloudinary.com/nishimweprince/image/upload/v1782863013/timesheets/website/caregiving-hero_gj58wh.jpg';
-
-const ABOUT_IMAGE_MAIN =
-  'https://res.cloudinary.com/nishimweprince/image/upload/v1782865476/timesheets/website/elder-nursing_inrsx0.jpg';
-const ABOUT_IMAGE_INSET =
-  'https://res.cloudinary.com/nishimweprince/image/upload/v1782865397/timesheets/website/help-1_zuxzvj.jpg';
+const HERO_IMAGE_SRC = cldWarm(IMAGES.hero);
 
 export default function HomePage() {
   return (
@@ -40,10 +36,13 @@ export default function HomePage() {
         >
           <Image
             src={HERO_IMAGE_SRC}
-            alt="Caregiving Hero"
+            alt=""
             fill
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={cldBlur(IMAGES.hero)}
             className="object-cover"
-            priority
+            preload
           />
         </div>
 
@@ -62,7 +61,7 @@ export default function HomePage() {
               {COPY.heroSub}
             </p>
 
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-3.5 mb-8 md:mb-9">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-6 mb-8 md:mb-9">
               <a
                 href={`tel:${COMPANY.phoneHref}`}
                 className="inline-flex w-full sm:w-auto items-center justify-center bg-primary text-primary-foreground text-[15.5px] font-semibold px-[26px] py-3.5 rounded-md no-underline transition-colors hover:bg-primary/90"
@@ -71,9 +70,12 @@ export default function HomePage() {
               </a>
               <a
                 href="#services"
-                className="inline-flex w-full sm:w-auto items-center justify-center bg-transparent text-white text-[15.5px] font-semibold px-[26px] py-3.5 rounded-md border-[1.5px] border-white/70 no-underline transition-colors hover:bg-white/10"
+                className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 py-2 text-[15.5px] font-semibold text-white no-underline transition-colors hover:text-sky-muted sm:justify-start"
               >
                 {CTA.secondary}
+                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none">
+                  &rarr;
+                </span>
               </a>
             </div>
 
@@ -94,28 +96,35 @@ export default function HomePage() {
 
       <TrustStrip />
 
-      <section id="services" className="page-container py-24 md:py-28">
-        <SectionHeader
-          eyebrow="Levels of care"
-          title="Three levels of support, one standard of care"
-          description={COPY.servicesIntro}
-          className="mb-12"
-        />
+      <TrustStatement />
 
-        <CareLevels />
+      <section id="services" className="page-container py-24 md:py-28">
+        <Reveal>
+          <SectionHeader
+            eyebrow="Levels of care"
+            title="Three levels of support, one standard of care"
+            description={COPY.servicesIntro}
+            className="mb-12"
+          />
+        </Reveal>
+
+        <Reveal delay={100}>
+          <CareLevels />
+        </Reveal>
       </section>
 
       <SectionShell band>
-        <div className="page-container py-20 md:py-24 grid items-center gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
-          {/* Two-image collage for depth: primary portrait + smaller overlapping tile. */}
+        <Reveal className="page-container py-20 md:py-24 grid items-center gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
           <div className="relative">
             <div className="relative aspect-4/5 w-full overflow-hidden rounded-lg">
               <Image
-                src={ABOUT_IMAGE_MAIN}
+                src={cldWarm(IMAGES.elderNursing)}
                 alt="Nurse supporting an older adult at home"
                 fill
                 className="object-cover"
                 sizes="(min-width: 768px) 40vw, 100vw"
+                placeholder="blur"
+                blurDataURL={cldBlur(IMAGES.elderNursing)}
               />
             </div>
           </div>
@@ -129,14 +138,14 @@ export default function HomePage() {
             />
             <p className="type-body">{COPY.aboutApproach}</p>
           </div>
-        </div>
+        </Reveal>
       </SectionShell>
 
       <section
         id="compliance"
         className="page-container py-20 md:py-24"
       >
-        <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14 items-start">
+        <Reveal className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14 items-start">
           <div>
             <SectionHeader
               eyebrow="Compliance & Licensing"
@@ -149,7 +158,7 @@ export default function HomePage() {
           </div>
 
           <ComplianceGrid />
-        </div>
+        </Reveal>
       </section>
 
       <SectionShell id="faqs" band>
@@ -161,22 +170,24 @@ export default function HomePage() {
             className="mb-11 mx-auto"
           />
 
-          <Accordion type="single" collapsible>
-            {FAQS.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="border-b border-border"
-              >
-                <AccordionTrigger className="text-[16.5px] py-5">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-[15px] pb-5 pr-2">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <Reveal>
+            <Accordion type="single" collapsible>
+              {FAQS.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="border-b border-border"
+                >
+                  <AccordionTrigger className="text-[16.5px] py-5">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-[15px] pb-5 pr-2">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Reveal>
         </div>
       </SectionShell>
 

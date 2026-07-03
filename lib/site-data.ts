@@ -95,6 +95,9 @@ export const COPY = {
   servicesOverview:
     "Every care situation is different. Some people need one-to-one support with daily routines and community participation. Others need closer supervision or hands-on assistance. Some require longer-term nursing support because they are medically fragile or technology dependent. Our services page helps you identify the level of support that best fits your situation.",
   fundingNote: "Funding/eligibility may apply — we'll walk you through it.",
+  trustEyebrow: "The Tuza standard",
+  trustStatement:
+    "Home care works best when a family can reach a real person, understand what happens next, and trust who is at the door.",
   aboutHeadline: "Care that puts dignity and clear communication first",
   aboutIntro:
     "Tuza Health is focused on delivering person-centred support in the home, with an emphasis on dignity, safety and practical day-to-day care. We believe home-based care works best when families can reach a real person, understand what to expect, and trust the team supporting them.",
@@ -105,7 +108,7 @@ export const COPY = {
     "This section brings together the public information families and referral partners most often need: our legal business name, verified contact details, service area, provider identifiers and key policies.",
   complianceNote:
     "If any detail below changes, we update it promptly and show the latest review date so families and partners can rely on the information published here.",
-  licenceStatus: "Verification in progress",
+  licenceStatus: "Application in review",
   privacyOnRequest:
     "Notice of Privacy Practices and licensing documents available on request — call our office directly.",
   faqTitle: "Common questions from families",
@@ -146,6 +149,26 @@ export const CONTACT_REASONS = [
 ] as const;
 
 export type Service = (typeof SERVICES)[number];
+
+/**
+ * Trust layer for an early-stage agency: the care thesis as one editorial
+ * statement, plus three pillars drawn only from verifiable facts (staffing
+ * model, CDDO listing, published identifiers) — no reviews, no invented stats.
+ */
+export const TRUST_PILLARS = [
+  {
+    title: "Clinician-led when it counts",
+    body: "Specialised care is delivered by qualified RN and LPN staff, alongside our supportive and enhanced day-to-day support.",
+  },
+  {
+    title: "Rooted in Johnson County",
+    body: "Tuza Health appears on the official Johnson County CDDO provider lists for all three services we deliver.",
+  },
+  {
+    title: "Transparent by default",
+    body: "Our legal name, provider identifiers, service area and policies are published and dated — details you can verify, not take on faith.",
+  },
+] as const;
 
 export const FAQS = [
   {
