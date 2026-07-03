@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ServiceCard } from "@/components/sections/service-card";
 import { SectionHeader } from "@/components/sections/section-header";
 import { Button } from "@/components/ui/button";
+import { pageMetadata } from "@/lib/seo";
 import { SERVICES, COPY, CTA } from "@/lib/site-data";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Services",
+  description:
+    "Three levels of home-based support from Tuza Health — Supportive Home Care, Enhanced Care, and Specialised Medical Care — matched to each person's needs in Johnson County, KS.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

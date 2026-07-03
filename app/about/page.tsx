@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SectionHeader } from "@/components/sections/section-header";
 import { cldBlur, cldWarm, IMAGES } from "@/lib/cloudinary";
+import { pageMetadata } from "@/lib/seo";
 import { COPY, COMPANY } from "@/lib/site-data";
+
+export const metadata: Metadata = pageMetadata({
+  title: "About",
+  description:
+    "How Tuza Health delivers person-centred home care in Johnson County, Kansas — dignity, plain-language communication, and public identifiers you can verify.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

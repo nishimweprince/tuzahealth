@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ComplianceGrid } from "@/components/sections/compliance-grid";
 import { SectionHeader } from "@/components/sections/section-header";
 import { Button } from "@/components/ui/button";
+import { pageMetadata } from "@/lib/seo";
 import { COPY } from "@/lib/site-data";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Compliance & Licensing",
+  description:
+    "Tuza Health's public identifiers, licensing status, service area and privacy policies — clearly published and dated for families and referral partners. NPI 1376248864.",
+  path: "/compliance",
+});
 
 export default function CompliancePage() {
   return (

@@ -6,6 +6,13 @@ import { ScrollToHash } from "@/components/scroll-to-hash";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "@/components/ui/sonner";
+import {
+  DESCRIPTION_DEFAULT,
+  OG_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+  TITLE_DEFAULT,
+} from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,12 +29,44 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Tuza Health, LLC | Home-Based Support in Johnson County, KS",
-  description:
-    "Tuza Health, LLC provides home-based support in Johnson County, Kansas — Supportive Home Care, Enhanced Care Services, and Specialized Medical Care. Accepting new referrals. NPI 1376248864.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE_DEFAULT,
+    template: "%s | Tuza Health",
+  },
+  description: DESCRIPTION_DEFAULT,
+  applicationName: SITE_NAME,
+  alternates: { canonical: "/" },
+  keywords: [
+    "home care Johnson County",
+    "home health Overland Park",
+    "supportive home care Kansas",
+    "enhanced care services",
+    "specialized medical care",
+    "Tuza Health",
+  ],
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: TITLE_DEFAULT,
+    description: DESCRIPTION_DEFAULT,
+    url: SITE_URL,
+    locale: "en_US",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE_DEFAULT,
+    description: DESCRIPTION_DEFAULT,
+    images: [OG_IMAGE.url],
   },
 };
 
